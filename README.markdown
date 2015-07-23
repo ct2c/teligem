@@ -14,7 +14,7 @@ Then run 'bundle install'
 
 ## SETUP
 
-# MODEL
+### MODEL
 
 When a payment has been made, Telipass sends to the notification url those parameters.
 Pick the ones you are interested in and put it in your payment model.
@@ -51,7 +51,7 @@ as they are used to check if the payment really comes from the Telipass platefor
   t.string :custom                      # Custom parameters
 ```
 
-# RAILS SECRETS
+### RAILS SECRETS
 
 Add to your config/secrets.yml (don't forget to add it to .gitignore)
 
