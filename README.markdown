@@ -70,10 +70,20 @@ To check if the payment really comes from the Telipass website, set your params 
     ntu: params[:ntu]
   }
 
-  Telipass.new.security_check(params)
-```
+  if Telipass.new.security_check(params) do
+    # ex: Give some user coins
+  else
+    # ex: Send a alert security
+  end
 
+```
 It will return true if the payment really comes from Telipass, otherwise it will return false.
+
+## TODO
+* Check if telikey is here otherwise show logger error info
+* Get payment detailed info in order to set easier the earning
+(most important infos are: module_name, payment_method, point_name, amount, credit)
+
 
 ## How to contribute?
 * Fork this repository

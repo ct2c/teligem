@@ -32,7 +32,7 @@ class Teligem
 
   private
     def get_security_code(enduser_ip, ntu)
-      code = enduser_ip + ntu + @configs['telikey']
+      code = enduser_ip.to_s + ntu.to_s + @configs['telikey'].to_s
       Digest::MD5.hexdigest(code)
     end
 
