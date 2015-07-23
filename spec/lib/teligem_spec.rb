@@ -4,13 +4,23 @@ require "spec_helper"
 RSpec.describe Teligem do
 
   describe '#security_check' do
+    before(:each) do
+      @enduser_ip = "123456"
+      @ntu        = "123456"
+
+      hash = YAML.load_file("config/secrets.yml")
+      code = @enduser_ip + @ntu + hash['telikey']
+      @security_code = Digest::MD5.hexdigest(code)
+    end
     context 'when request comes from telipass' do
       it 'should set response to true' do
-        enduser_ip = "123456"
-        ntu        = "123456"
-        security_code = Teligem.get_security_code(enduser_ip, ntu)
+        @params = {
+          security_code: @security_code,
+          enduser_ip:    @enduser_ip,
+          ntu:           @ntu
+        }
 
-        response = Teligem.security_check(security_code, enduser_ip, ntu)
+        response = Teligem.new.security_check(@params)
 
         expect(response).to be true
       end
@@ -18,11 +28,13 @@ RSpec.describe Teligem do
 
     context 'when not from telipass plateform' do
       it 'should set response to false' do
-        enduser_ip = "123456"
-        ntu        = "123456"
-        security_code = "not_matching_security_code"
+        @params = {
+            security_code: "not_matching_security_code",
+            enduser_ip:    @enduser_ip,
+            ntu:           @ntu
+        }
 
-        response = Teligem.security_check(security_code, enduser_ip, ntu)
+        response = Teligem.new.security_check(@params)
 
         expect(response).to be false
       end

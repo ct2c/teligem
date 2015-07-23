@@ -49,16 +49,21 @@ as they are used to check if the payment really comes from the Telipass platefor
 
 # RAILS SECRETS
 
-Add to your config/secrets.yml. Don't forget to add it to .gitignore
+Add to your config/secrets.yml (don't forget to add it to .gitignore)
 
-development
   telikey: "your-telipass-key"
 
 ## USAGE
 
-To check if the payment really comes from the Telipass website, just call call:
+To check if the payment really comes from the Telipass website, set your params and just call call:
 
-  security_check(params[:security_code], params[:enduser_ip], params[:ntu])
+  params = {
+    security_code: params[:security_code],
+    enduser_ip: params[:enduser_ip],
+    ntu: params[:ntu]
+  }
+
+  Telipass.new.security_check(params)
 
 It will return true if the payment really comes from Telipass, otherwise it will return false.
 

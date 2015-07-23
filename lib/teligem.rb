@@ -3,7 +3,20 @@ require 'yaml'
 
 class Teligem
 
-  def self.security_check(security_code, enduser_ip, ntu)
+  def initialize
+    @configs = YAML.load_file("config/secrets.yml")
+  end
+
+  # === security_check(params)
+  # Hash that must at least contains:
+  # * security_code: the security code sent by telipass
+  # * enduser_ip: the enduser ip address
+  # * ntu: unique transaction number sent by telipass
+  def security_check(params)
+    security_code = params[:security_code]
+    enduser_ip    = params[:enduser_ip]
+    ntu           = params[:ntu]
+
     unless security_code.nil? || enduser_ip.nil? || ntu.nil?
       hash = get_security_code(enduser_ip, ntu)
     end
@@ -18,14 +31,9 @@ class Teligem
   end
 
   private
-    def self.get_security_code(enduser_ip, ntu)
-      code = enduser_ip + ntu + get_secret
+    def get_security_code(enduser_ip, ntu)
+      code = enduser_ip + ntu + @configs['telikey']
       Digest::MD5.hexdigest(code)
-    end
-
-    def self.get_secret
-      hash = YAML.load_file("config/secrets.yml")
-      return hash['telikey']
     end
 
 end
