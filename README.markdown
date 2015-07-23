@@ -6,7 +6,9 @@ Teligem allows you to integrate the notifications of the [Telipass](https://teli
 
 In your Gemfile
 
+```ruby
   gem 'teligem'
+```
 
 Then run 'bundle install'
 
@@ -20,6 +22,7 @@ Pick the ones you are interested in and put it in your payment model.
 You must at least have those attributes: security_code:string, enduser_ip:string and ntu:string,
 as they are used to check if the payment really comes from the Telipass plateform.
 
+```ruby
   # Security
   t.string :security_code               # SecurityCode
   # User Infos
@@ -46,17 +49,21 @@ as they are used to check if the payment really comes from the Telipass platefor
   t.date   :transaction_date            # Transaction date
   t.string :transaction_id              # Transaction ID
   t.string :custom                      # Custom parameters
+```
 
 # RAILS SECRETS
 
 Add to your config/secrets.yml (don't forget to add it to .gitignore)
 
+```ruby
   telikey: "your-telipass-key"
+```
 
 ## USAGE
 
 To check if the payment really comes from the Telipass website, set your params and just call call:
 
+```ruby
   params = {
     security_code: params[:security_code],
     enduser_ip: params[:enduser_ip],
@@ -64,6 +71,7 @@ To check if the payment really comes from the Telipass website, set your params 
   }
 
   Telipass.new.security_check(params)
+```
 
 It will return true if the payment really comes from Telipass, otherwise it will return false.
 
