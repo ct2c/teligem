@@ -17,14 +17,15 @@ class Teligem
     return response
   end
 
-  def self.get_security_code(enduser_ip, ntu)
-    code = enduser_ip + ntu + get_secret
-    Digest::MD5.hexdigest(code)
-  end
+  private
+    def self.get_security_code(enduser_ip, ntu)
+      code = enduser_ip + ntu + get_secret
+      Digest::MD5.hexdigest(code)
+    end
 
-  def self.get_secret
-    hash = YAML.load_file("config/secrets.yml")
-    return hash['telikey']
-  end
+    def self.get_secret
+      hash = YAML.load_file("config/secrets.yml")
+      return hash['telikey']
+    end
 
 end
