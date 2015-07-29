@@ -30,6 +30,25 @@ class Teligem
     return response
   end
 
+  def check_status(status)
+    case status
+    when 1 # Valid
+      true
+    when 2 # Rejected
+      false
+    when 3 # Differed
+      false
+    when 4 # Test
+      false
+    else
+      false
+    end
+  end
+
+  def get_earning(point_name)
+    return Teligem::EARNING[point_name].to_i
+  end
+
   private
     def get_security_code(enduser_ip, ntu)
       code = enduser_ip.to_s + ntu.to_s + @configs['telikey'].to_s

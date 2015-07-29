@@ -41,4 +41,31 @@ RSpec.describe Teligem do
     end
   end
 
+  describe '#check_status' do
+    it 'should return true if status valid' do
+      expect(Teligem.new.check_status(1)).to eq true
+    end
+    it 'should return false if status rejected' do
+      expect(Teligem.new.check_status(2)).to eq false
+    end
+    it 'should return false if status differed' do
+      expect(Teligem.new.check_status(3)).to eq false
+    end
+    it 'should return true if status test' do
+      expect(Teligem.new.check_status(4)).to eq false
+    end
+  end
+
+  describe '#get_earning' do
+    it 'should return correct earning' do
+      Teligem::EARNING = {
+        "FRSMS10" => 10,
+        "FRSMS20" => 20
+      }
+
+      expect(Teligem.new.get_earning("FRSMS10")).to eq 10
+      expect(Teligem.new.get_earning("FRSMS20")).to eq 20
+      expect(Teligem.new.get_earning("UNKNOWN")).to eq 0
+    end
+  end
 end
