@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'teligem'
-  s.version     = '0.0.5'
+  s.version     = '0.0.6'
   s.date        = '2015-07-22'
   s.platform = Gem::Platform::RUBY
   s.summary     = "A gem to implement Telipass micropayment"

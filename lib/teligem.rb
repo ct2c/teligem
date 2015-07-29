@@ -34,7 +34,7 @@ class Teligem
   # Return true if status is 1 (valid)
   # Otherwise return false
   def check_status(status)
-    case status
+    case status.to_i
     when 1 # Valid
       true
     when 2 # Rejected
