@@ -30,6 +30,9 @@ class Teligem
     return response
   end
 
+  # === check_status(status)
+  # Return true if status is 1 (valid)
+  # Otherwise return false
   def check_status(status)
     case status
     when 1 # Valid
@@ -45,6 +48,14 @@ class Teligem
     end
   end
 
+  # === get_earning(point_name)
+  # Get earning from the hash Teligem::EARNING
+  # Hash exemple:
+  # Teligem::EARNING =
+  # { "FRSMS10" => 10,
+  #   "FRSMS20" => 20
+  # }
+  # Return 0 if key unknown
   def get_earning(point_name)
     return Teligem::EARNING[point_name].to_i
   end
