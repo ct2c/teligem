@@ -67,5 +67,15 @@ RSpec.describe Teligem do
       expect(Teligem.new.get_earning("FRSMS20")).to eq 20
       expect(Teligem.new.get_earning("UNKNOWN")).to eq 0
     end
+    it 'should accept hashes' do
+      Teligem::EARNING = {
+        "FRSMS10" => {:coins => 10, :picto => 'congrats'},
+        "FRSMS20" => 20
+      }
+
+      expect(Teligem.new.get_earning("FRSMS10")[:coins]).to eq 10
+      expect(Teligem.new.get_earning("FRSMS10")[:picto]).to eq 'congrats'
+      expect(Teligem.new.get_earning("FRSMS20")).to eq 20
+    end
   end
 end

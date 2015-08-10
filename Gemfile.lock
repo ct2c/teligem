@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    teligem (0.0.5)
+    teligem (0.0.6)
 
 GEM
   remote: https://rubygems.org/

@@ -57,7 +57,10 @@ class Teligem
   # }
   # Return 0 if key unknown
   def get_earning(point_name)
-    return Teligem::EARNING[point_name].to_i
+    if Teligem::EARNING[point_name].nil?
+      return 0
+    end
+    return Teligem::EARNING[point_name]
   end
 
   private
